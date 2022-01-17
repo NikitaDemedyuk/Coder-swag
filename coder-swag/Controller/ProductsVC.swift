@@ -11,20 +11,20 @@ class ProductsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     @IBOutlet weak var productsCollection: UICollectionView!
     
-    private (set) public var products = [Product]()
+    private(set) public var products = [Product]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        productsCollection.delegate = self
         productsCollection.dataSource = self
+        productsCollection.delegate = self
     }
-    
-    func initProducts (category: Category) {
+
+    func initProducts(category: Category) {
         products = DataService.instance.getProducts(forCategoryTitle: category.title)
         navigationItem.title = category.title
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return products.count
     }
@@ -35,6 +35,7 @@ class ProductsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             cell.updateViews(product: product)
             return cell
         }
+        
         return ProductCell()
     }
 }

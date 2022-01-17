@@ -10,10 +10,9 @@ import UIKit
 class CategoriesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var categoryTable: UITableView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         categoryTable.dataSource = self
         categoryTable.delegate = self
     }
@@ -36,15 +35,14 @@ class CategoriesVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         let category = DataService.instance.getCategories()[indexPath.row]
         performSegue(withIdentifier: "ProductsVC", sender: category)
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let productVC = segue.destination as? ProductsVC {
+        if let productsVC = segue.destination as? ProductsVC {
             let barBtn = UIBarButtonItem()
             barBtn.title = ""
             navigationItem.backBarButtonItem = barBtn
             assert(sender as? Category != nil)
-            productVC.initProducts(category: sender as! Category)
+            productsVC.initProducts(category: sender as! Category)
         }
     }
 }
-
